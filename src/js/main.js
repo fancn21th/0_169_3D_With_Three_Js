@@ -1,14 +1,37 @@
 let scene, camera, renderer;
 const add = 0.01;
 
-const render = function () {};
+function getTriangle() {
+  // This code demonstrates how to draw a triangle
+  var triangle = new THREE.Geometry();
+  triangle.vertices.push(new THREE.Vector3(1, 1, 0));
+  triangle.vertices.push(new THREE.Vector3(3, 1, 0));
+  triangle.vertices.push(new THREE.Vector3(3, 3, 0));
+
+  triangle.faces.push(new THREE.Face3(0, 1, 2));
+
+  return triangle;
+}
+
+function getMaterial() {
+  const material = new THREE.MeshBasicMaterial({
+    color: new THREE.Color("red"),
+  });
+  return material;
+}
+
+const render = function () {
+  const triangle = new THREE.Mesh(getTriangle(), getMaterial());
+
+  scene.add(triangle);
+};
 
 // set up the environment -
 // initialize scene, camera, objects and renderer
 const init = function () {
   // create the scene
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x00000);
+  scene.background = new THREE.Color(0xffffff);
 
   // create an locate the camera
   camera = new THREE.PerspectiveCamera(
@@ -39,6 +62,8 @@ const init = function () {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
   });
+
+  // defining geometry
 
   // Observe a scene or a renderer
   if (typeof __THREE_DEVTOOLS__ !== "undefined") {
