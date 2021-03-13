@@ -2,20 +2,25 @@ let scene, camera, renderer;
 const add = 0.01;
 
 function getTriangle() {
-  // This code demonstrates how to draw a triangle
-  var triangle = new THREE.Geometry();
-  triangle.vertices.push(new THREE.Vector3(1, 1, 0));
-  triangle.vertices.push(new THREE.Vector3(3, 1, 0));
-  triangle.vertices.push(new THREE.Vector3(3, 3, 0));
+  var geometry = new THREE.Geometry();
 
-  triangle.faces.push(new THREE.Face3(0, 1, 2));
+  // Student: some data below must be fixed
+  // for both triangles to appear !
+  geometry.vertices.push(new THREE.Vector3(3, 3, 0)); // 0
+  geometry.vertices.push(new THREE.Vector3(7, 3, 0)); // 1
+  geometry.vertices.push(new THREE.Vector3(7, 7, 0));
+  geometry.vertices.push(new THREE.Vector3(3, 7, 0)); // 3
 
-  return triangle;
+  // geometry.faces.push(new THREE.Face3(0, 1, 2)); // 此面为正面会显示
+  geometry.faces.push(new THREE.Face3(2, 0, 3)); // 此面为背面 不会显示
+
+  return geometry;
 }
 
 function getMaterial() {
   const material = new THREE.MeshBasicMaterial({
-    color: new THREE.Color("red"),
+    color: 0xf6831e,
+    side: THREE.FrontSide,
   });
   return material;
 }
